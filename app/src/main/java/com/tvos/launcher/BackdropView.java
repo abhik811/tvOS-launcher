@@ -7,10 +7,11 @@ import android.view.View;
 import java.io.InputStream;
 import java.util.Random;
 
-/** Original procedural landscape, rasterized once per layout and preference change. */
+/** Static artwork decoded once per layout/preference change; procedural fallback stays offline. */
 final class BackdropView extends View {
     private Bitmap texture;
     private final Paint sampling = new Paint(Paint.FILTER_BITMAP_FLAG);
+    private final Rect source = new Rect(), destination = new Rect();
     private String selection, image;
     BackdropView(Context c) { super(c); setImportantForAccessibility(IMPORTANT_FOR_ACCESSIBILITY_NO); }
     void refresh() { selection = null; invalidate(); }
@@ -19,9 +20,15 @@ final class BackdropView extends View {
         Preferences prefs = new Preferences(getContext());
         if (!prefs.backdrop().equals(selection) || !prefs.image().equals(image) || texture == null) {
             selection = prefs.backdrop(); image = prefs.image();
-            texture = build(Math.max(1, Math.min(getWidth(), 960)), Math.max(1, Math.min(getHeight(), 540)));
+            texture = build(Math.max(1, Math.min(getWidth(), 1920)), Math.max(1, Math.min(getHeight(), 1080)));
+            int w=texture.getWidth(), h=texture.getHeight();
+            float scale=Math.max(getWidth()/(float)w,getHeight()/(float)h);
+            int cropW=Math.min(w,Math.max(1,Math.round(getWidth()/scale)));
+            int cropH=Math.min(h,Math.max(1,Math.round(getHeight()/scale)));
+            source.set((w-cropW)/2,(h-cropH)/2,(w+cropW)/2,(h+cropH)/2);
+            destination.set(0,0,getWidth(),getHeight());
         }
-        canvas.drawBitmap(texture, null, new Rect(0,0,getWidth(),getHeight()), sampling);
+        canvas.drawBitmap(texture, source, destination, sampling);
     }
     private Bitmap build(int width,int height) {
         if ("photo".equals(selection) && !image.isEmpty()) {
@@ -34,6 +41,15 @@ final class BackdropView extends View {
                     Bitmap result=BitmapFactory.decodeStream(in,null,size); if(result!=null)return result;
                 }
             }catch(Exception ignored){ /* A revoked or removed image falls back to the built-in scenery. */ }
+        }
+        if (!"black".equals(selection)) {
+            int artwork="dawn".equals(selection)?R.drawable.wallpaper_dawn:
+                    "night".equals(selection)?R.drawable.wallpaper_night:R.drawable.wallpaper_aurora;
+            BitmapFactory.Options options=new BitmapFactory.Options();
+            options.inPreferredConfig=Bitmap.Config.RGB_565;
+            options.inScaled=false;
+            Bitmap result=BitmapFactory.decodeResource(getResources(),artwork,options);
+            if(result!=null)return result;
         }
         Bitmap bitmap=Bitmap.createBitmap(width,height,Bitmap.Config.RGB_565);
         Canvas c=new Canvas(bitmap);c.scale(width/960f,height/540f);

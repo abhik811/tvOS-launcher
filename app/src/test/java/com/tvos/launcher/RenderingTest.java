@@ -34,6 +34,11 @@ public class RenderingTest {
         DemoApps.install(RuntimeEnvironment.getApplication());
         assertEquals(8,AppCatalog.load(RuntimeEnvironment.getApplication(),false).size());
         try(ActivityController<HomeActivity> c=Robolectric.buildActivity(HomeActivity.class).setup().visible()){capture(c.get(),"home-demo-apps");}
+        for(String backdrop:new String[]{"dawn","night"}){
+            new Preferences(RuntimeEnvironment.getApplication()).text("backdrop",backdrop);
+            try(ActivityController<HomeActivity> c=Robolectric.buildActivity(HomeActivity.class).setup().visible()){capture(c.get(),"home-"+backdrop);}
+        }
+        new Preferences(RuntimeEnvironment.getApplication()).text("backdrop","aurora");
         try(ActivityController<ControlCenterActivity> c=Robolectric.buildActivity(ControlCenterActivity.class).setup().visible()){capture(c.get(),"control-center");}
     }
     private void capture(Activity activity,String name) throws IOException {

@@ -32,7 +32,7 @@ for apk in apks:
     with zipfile.ZipFile(apk) as archive:
         assert 'assets/licenses/LICENSE.txt' in archive.namelist()
         assert not any(p.endswith('.so') for p in archive.namelist())
-    assert apk.stat().st_size < 250 * 1024, 'Preview exceeded the 250 KiB size budget'
+    assert apk.stat().st_size < 1024 * 1024, 'APK exceeded the 1 MiB artwork size budget'
     records.append({'file': name, 'application_id': expected, 'signed': signed,
                     'bytes': apk.stat().st_size, 'sha256': hashlib.sha256(apk.read_bytes()).hexdigest(),
                     'certificate': result.stdout.strip() if signed else 'Unsigned build artifact'})

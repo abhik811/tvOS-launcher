@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0-preview",
+  "version": "1.0.1-preview",
   "tests": {
     "passed": 40,
     "failed": 0,
@@ -14,11 +14,11 @@
   "lint": {
     "preview": {
       "errors": 0,
-      "warnings": 12
+      "warnings": 11
     },
     "release": {
       "errors": 0,
-      "warnings": 12
+      "warnings": 11
     }
   },
   "artifacts": [
@@ -26,21 +26,31 @@
       "file": "tvOS-original-preview.apk",
       "application_id": "com.tvos.launcher.preview",
       "signed": true,
-      "bytes": 43765,
-      "sha256": "d6b1e8d9749cda80f33c18591388c5abfc5774a5b9ce099359ce2da80d32bf63",
+      "bytes": 470856,
+      "sha256": "fd4ad149ed3292298d2e49a07aaf88ff6204c341462f1b55c234e5e5a359136a",
       "certificate": "Signer #1 certificate DN: C=US, O=Android, CN=Android Debug\nSigner #1 certificate SHA-256 digest: e8f9e9d2885e71422ee1f6ef1792c34206c473366263a2fc12c33fd81de8d343\nSigner #1 certificate SHA-1 digest: 7732503fb6216bceca99815b2b74c19192160b7f\nSigner #1 certificate MD5 digest: 3e6684b8b6e61cc9e14cf702643a504f"
     },
     {
       "file": "tvOS-original-release-unsigned.apk",
       "application_id": "com.tvos.launcher",
       "signed": false,
-      "bytes": 39665,
-      "sha256": "d307a213cd2704df87ba25d43ac055c7769afe6775c78fe187640fc1b7be5104",
+      "bytes": 466752,
+      "sha256": "1d2cfcf7690df048841a787ff62b07ae1ad22c82199663c20b152703b92db3f7",
       "certificate": "Unsigned build artifact"
     }
   ],
   "rendering": "Actual application view hierarchies rendered by Robolectric native graphics at 1920x1080; sample app fixtures only.",
   "physical_device_tested": false,
   "performance_measured": false,
-  "runtime_dependencies": []
+  "runtime_dependencies": [],
+  "wallpapers": {
+    "dimensions": [
+      1672,
+      941
+    ],
+    "count": 3,
+    "format": "WebP",
+    "source": "Original AI-generated landscapes",
+    "total_bytes": 426210
+  }
 }

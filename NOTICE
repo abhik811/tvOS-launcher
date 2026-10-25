@@ -1,8 +1,9 @@
 tvOS launcher
 Copyright (c) 2026 tvOS contributors
 
-Application source, geometric app/category symbols and procedural backgrounds
-were authored for this implementation. Application code uses the Android
+Application source, geometric app/category symbols and procedural fallback backgrounds
+were authored for this implementation. The three photographic-style wallpapers
+were generated with OpenAI image generation for this project; see docs/ARTWORK.md. Application code uses the Android
 framework; there are no third-party runtime libraries or embedded font files.
 
 Build tooling:

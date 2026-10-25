@@ -2,7 +2,7 @@
 
 An independent, native Android TV launcher with a floating app dock, original scenery and a translucent glass interface. The app is named **tvOS**; it is an Android launcher, not Apple's operating system or an Apple product.
 
-**1.0.0 community preview · Android 8.0/API 26+ · No production library dependencies**
+**1.0.1 community preview · Android 8.0/API 26+ · No production library dependencies**
 
 ![Home with sample installed apps](docs/images/home.png)
 
@@ -15,11 +15,13 @@ The screenshots render the actual app views using Android framework simulation a
 - TV Apps and All Apps views, populated from launchable apps installed on the device.
 - Floating clock/gear capsule: OK opens Control Center; hold OK opens Settings.
 - Layered glass surfaces with a soft sheen, thin edge lighting and three finish strengths. There is no continuous backdrop blur or video loop.
-- Original Aurora, Dawn and Night scenery, solid black, or a local photo selected through Android's document picker.
+- Original AI-generated Aurora Coast, Desert Dawn and Alpine Night wallpapers, solid black, or a local photo selected through Android's document picker.
 - Home preferences, reduce-motion controls, once-per-boot startup app, clock screen saver and optional inactivity timeout.
 - Native network, Wi-Fi, Bluetooth, audio, display, storage and app-information panels. Protected operations have an explicit Android-settings button.
 
 ![Control Center](docs/images/control-center.png)
+
+The three bundled wallpapers are original AI-generated artwork, compressed as WebP at their native 1672 × 941 resolution. They are decoded once per view/background change, with no continuous animation or network downloads. See [artwork details and prompts](docs/ARTWORK.md).
 
 ## Install
 
