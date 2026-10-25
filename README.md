@@ -2,15 +2,16 @@
 
 An independent, native Android TV launcher with a floating app dock, original scenery and a translucent glass interface. The app is named **tvOS**; it is an Android launcher, not Apple's operating system or an Apple product.
 
-**1.0.1 community preview · Android 8.0/API 26+ · No production library dependencies**
+**1.0.2 community preview · Android 8.0/API 26+ · No production library dependencies**
 
 ![Home with sample installed apps](docs/images/home.png)
 
-The screenshots render the actual app views using Android framework simulation at 1920 × 1080. App names in the Home screenshot are test fixtures, not bundled streaming services. Physical-device performance and compatibility testing are still pending.
+The screenshots render the actual app views using Android framework simulation at 1920 × 1080. App names and colorful icon banners in the Home screenshot are original test fixtures. They are not bundled apps or streaming services; installed apps supply their own branding. Physical-device performance and compatibility testing are still pending.
 
 ## Features
 
 - Six-column dock by default, adjustable from four to seven columns; D-pad navigation and app reordering.
+- Rounded 5:3 app cards with focus rings, labels below the selected card and original consistent vector controls. Installed banners retain their aspect ratio; apps without custom artwork receive a letter tile. See [icon design](docs/ICONS.md).
 - Hold OK on an app to move it earlier/later, place it in the dock or view its information.
 - TV Apps and All Apps views, populated from launchable apps installed on the device.
 - Floating clock/gear capsule: OK opens Control Center; hold OK opens Settings.

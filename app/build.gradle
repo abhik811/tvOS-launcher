@@ -6,7 +6,7 @@ if (secrets.any { it != null && !it.isEmpty() } && !signedRelease) throw new Gra
 android {
     namespace 'com.tvos.launcher'
     compileSdk 34
-    defaultConfig { applicationId 'com.tvos.launcher'; minSdk 26; targetSdk 34; versionCode 101; versionName '1.0.1' }
+    defaultConfig { applicationId 'com.tvos.launcher'; minSdk 26; targetSdk 34; versionCode 102; versionName '1.0.2' }
     signingConfigs {
         if (signedRelease) {
             owner { storeFile file(secrets[0]); storePassword secrets[1]; keyAlias secrets[2]; keyPassword secrets[3] }

@@ -1,5 +1,5 @@
 {
-  "version": "1.0.1-preview",
+  "version": "1.0.2-preview",
   "tests": {
     "passed": 40,
     "failed": 0,
@@ -26,16 +26,16 @@
       "file": "tvOS-original-preview.apk",
       "application_id": "com.tvos.launcher.preview",
       "signed": true,
-      "bytes": 470856,
-      "sha256": "fd4ad149ed3292298d2e49a07aaf88ff6204c341462f1b55c234e5e5a359136a",
+      "bytes": 473288,
+      "sha256": "c98f614a0d9058e3272f4d492edc4a0f7e98ead5de82672c2b3439197c137323",
       "certificate": "Signer #1 certificate DN: C=US, O=Android, CN=Android Debug\nSigner #1 certificate SHA-256 digest: e8f9e9d2885e71422ee1f6ef1792c34206c473366263a2fc12c33fd81de8d343\nSigner #1 certificate SHA-1 digest: 7732503fb6216bceca99815b2b74c19192160b7f\nSigner #1 certificate MD5 digest: 3e6684b8b6e61cc9e14cf702643a504f"
     },
     {
       "file": "tvOS-original-release-unsigned.apk",
       "application_id": "com.tvos.launcher",
       "signed": false,
-      "bytes": 466752,
-      "sha256": "1d2cfcf7690df048841a787ff62b07ae1ad22c82199663c20b152703b92db3f7",
+      "bytes": 469184,
+      "sha256": "ded741ff369e25042f1ff4fd64cc23feb5cbf299e6dbaad10ab8b3be95464925",
       "certificate": "Unsigned build artifact"
     }
   ],
@@ -52,5 +52,10 @@
     "format": "WebP",
     "source": "Original AI-generated landscapes",
     "total_bytes": 426210
+  },
+  "icons": {
+    "tv_card_aspect_ratio": "5:3",
+    "source": "Original Canvas/vector symbols; installed apps provide runtime branding",
+    "preview_banners": "Original test-only fixtures, not bundled applications"
   }
 }

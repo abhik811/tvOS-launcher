@@ -50,7 +50,7 @@ final class Ui {
             LinearLayout content=new LinearLayout(a);content.setGravity(Gravity.CENTER_VERTICAL);content.setPadding(dp(a,60),0,dp(a,60),dp(a,24));
             FrameLayout.LayoutParams cp=new FrameLayout.LayoutParams(-1,-1);cp.topMargin=dp(a,94);root.addView(content,cp);
             LinearLayout aside=new LinearLayout(a);aside.setOrientation(LinearLayout.VERTICAL);aside.setGravity(Gravity.CENTER);aside.setPadding(0,0,dp(a,44),0);
-            SymbolView icon=new SymbolView(a,symbol);aside.addView(icon,new LinearLayout.LayoutParams(dp(a,104),dp(a,104)));
+            SymbolView icon=new SymbolView(a,symbol,true);aside.addView(icon,new LinearLayout.LayoutParams(dp(a,104),dp(a,104)));
             explanation=text(a,subtitle,16,MUTED);explanation.setGravity(Gravity.CENTER);LinearLayout.LayoutParams ep=new LinearLayout.LayoutParams(-1,-2);ep.topMargin=dp(a,28);aside.addView(explanation,ep);
             content.addView(aside,new LinearLayout.LayoutParams(0,-2,.49f));
             ScrollView scroll=new ScrollView(a);scroll.setClipToPadding(false);scroll.setPadding(dp(a,6),dp(a,5),dp(a,6),dp(a,8));scroll.setVerticalScrollBarEnabled(false);

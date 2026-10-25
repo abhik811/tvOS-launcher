@@ -39,7 +39,7 @@ public final class HomeActivity extends Activity {
         int columns=prefs.columns();
         int tileWidth=Math.max(80,(getResources().getDisplayMetrics().widthPixels-Ui.dp(this,108))/columns-Ui.dp(this,16));
         for(int start=0;start<apps.size();start+=columns){
-            LinearLayout band=new LinearLayout(this);band.setClipChildren(false);band.setGravity(Gravity.CENTER_VERTICAL);band.setPadding(Ui.dp(this,9),Ui.dp(this,12),Ui.dp(this,9),Ui.dp(this,12));
+            LinearLayout band=new LinearLayout(this);band.setClipChildren(false);band.setClipToPadding(false);band.setGravity(Gravity.CENTER_VERTICAL);band.setPadding(Ui.dp(this,9),Ui.dp(this,12),Ui.dp(this,9),Ui.dp(this,12));
             if(start==0)band.setBackground(new GlassDrawable(getResources().getDisplayMetrics().density,prefs.glass(),26));
             for(int col=0;col<columns;col++){
                 int pos=start+col;
@@ -54,7 +54,7 @@ public final class HomeActivity extends Activity {
         status.setId(R.id.home_controls);status.setTag("controls");status.setFocusable(true);status.setFocusableInTouchMode(true);status.setClickable(true);status.setContentDescription("Control Center. Hold to open Settings.");
         status.setBackground(new GlassDrawable(getResources().getDisplayMetrics().density,prefs.glass(),28));
         TextClock clock=new TextClock(this);clock.setFormat12Hour("h:mm");clock.setFormat24Hour("HH:mm");clock.setTextSize(18);clock.setTextColor(Ui.textColors());clock.setDuplicateParentStateEnabled(true);clock.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);status.addView(clock);
-        SymbolView gear=new SymbolView(this,"settings");gear.setDuplicateParentStateEnabled(true);LinearLayout.LayoutParams gp=new LinearLayout.LayoutParams(Ui.dp(this,23),Ui.dp(this,23));gp.setMarginStart(Ui.dp(this,15));status.addView(gear,gp);
+        SymbolView gear=new SymbolView(this,"controls");gear.setDuplicateParentStateEnabled(true);LinearLayout.LayoutParams gp=new LinearLayout.LayoutParams(Ui.dp(this,23),Ui.dp(this,23));gp.setMarginStart(Ui.dp(this,15));status.addView(gear,gp);
         status.setOnClickListener(v->startActivity(new Intent(this,ControlCenterActivity.class)));
         status.setOnLongClickListener(v->{startActivity(new Intent(this,SettingsActivity.class));return true;});
         status.setOnFocusChangeListener((v,has)->{if(has)focused="controls";});
@@ -69,13 +69,13 @@ public final class HomeActivity extends Activity {
     }
     private View tile(AppCatalog.Entry app,int position,int width){
         LinearLayout tile=new LinearLayout(this);tile.setOrientation(LinearLayout.VERTICAL);tile.setClipChildren(false);tile.setTag(app.id);tile.setFocusable(true);tile.setFocusableInTouchMode(true);tile.setClickable(true);tile.setContentDescription(app.label);
-        tile.setPadding(Ui.dp(this,2),Ui.dp(this,2),Ui.dp(this,2),Ui.dp(this,2));tile.setBackground(new GlassDrawable(getResources().getDisplayMetrics().density,prefs.glass(),12));
-        ImageView banner=new ImageView(this);banner.setScaleType(ImageView.ScaleType.FIT_XY);banner.setImageBitmap(AppCatalog.artwork(this,app,Math.min(width,320),Math.min(width,320)*9/16));banner.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);
-        tile.addView(banner,new LinearLayout.LayoutParams(-1,width*9/16));
-        TextView label=Ui.text(this,app.label,12,Ui.WHITE);label.setTextColor(Ui.textColors());label.setDuplicateParentStateEnabled(true);label.setGravity(Gravity.CENTER);label.setSingleLine(true);label.setEllipsize(android.text.TextUtils.TruncateAt.END);label.setPadding(Ui.dp(this,4),Ui.dp(this,5),Ui.dp(this,4),Ui.dp(this,5));label.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);tile.addView(label);
+        AppIconView banner=new AppIconView(this,AppCatalog.artwork(this,app,Math.min(width,512),Math.min(width,512)*3/5));
+        tile.addView(banner,new LinearLayout.LayoutParams(-1,-2));
+        TextView label=Ui.text(this,app.label,12,Ui.WHITE);label.setTextColor(Ui.WHITE);label.setVisibility(View.INVISIBLE);label.setShadowLayer(Ui.dp(this,2),0,Ui.dp(this,1),0xcc000000);label.setGravity(Gravity.CENTER);label.setSingleLine(true);label.setEllipsize(android.text.TextUtils.TruncateAt.END);label.setPadding(Ui.dp(this,4),Ui.dp(this,5),Ui.dp(this,4),Ui.dp(this,5));label.setImportantForAccessibility(View.IMPORTANT_FOR_ACCESSIBILITY_NO);tile.addView(label);
         tile.setOnClickListener(v->Ui.open(this,app.launch));tile.setOnLongClickListener(v->{edit(app,position);return true;});
         tile.setOnFocusChangeListener((v,has)->{
-            if(has){focused=app.id;shelf.setText(app.label);}
+            label.setVisibility(has?View.VISIBLE:View.INVISIBLE);
+            if(has){focused=app.id;shelf.setText(app.label);banner.setElevation(Ui.dp(this,9));}else banner.setElevation(Ui.dp(this,3));
             v.animate().cancel();float scale=has?1.065f:1;
             if(Ui.animate(this))v.animate().scaleX(scale).scaleY(scale).translationY(has?-Ui.dp(this,3):0).setDuration(125).start();
             else{v.setScaleX(scale);v.setScaleY(scale);v.setTranslationY(0);}

@@ -22,7 +22,7 @@ public final class ControlCenterActivity extends Activity {
         feature.addView(pair,new LinearLayout.LayoutParams(0,-2,1));panel.addView(feature);
         LinearLayout shortcuts=new LinearLayout(this);
         View settings=tile("Settings","settings",()->launch(new Intent(this,SettingsActivity.class)));settings.setTag("settings");shortcut(shortcuts,settings);
-        shortcut(shortcuts,tile("Remotes","bluetooth",()->launch(DeviceActivity.intent(this,"bluetooth",null))));shortcut(shortcuts,tile("Apps","apps",()->launch(DeviceActivity.intent(this,"apps",null))));
+        shortcut(shortcuts,tile("Remotes","remote",()->launch(DeviceActivity.intent(this,"bluetooth",null))));shortcut(shortcuts,tile("Apps","apps",()->launch(DeviceActivity.intent(this,"apps",null))));
         LinearLayout.LayoutParams row=new LinearLayout.LayoutParams(-1,-2);row.topMargin=Ui.dp(this,9);panel.addView(shortcuts,row);
         setContentView(overlay);Ui.focus(saver);
     }
