@@ -1,0 +1,45 @@
+plugins { id 'com.android.application' }
+def secretNames = ['TVOS_KEYSTORE','TVOS_STORE_PASSWORD','TVOS_KEY_ALIAS','TVOS_KEY_PASSWORD']
+def secrets = secretNames.collect { System.getenv(it) }
+def signedRelease = secrets.every { it != null && !it.isEmpty() }
+if (secrets.any { it != null && !it.isEmpty() } && !signedRelease) throw new GradleException('Provide all four TVOS signing variables or none.')
+android {
+    namespace 'com.tvos.launcher'
+    compileSdk 34
+    defaultConfig { applicationId 'com.tvos.launcher'; minSdk 26; targetSdk 34; versionCode 100; versionName '1.0.0' }
+    signingConfigs {
+        if (signedRelease) {
+            owner { storeFile file(secrets[0]); storePassword secrets[1]; keyAlias secrets[2]; keyPassword secrets[3] }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'rules.pro'
+            if (signedRelease) signingConfig signingConfigs.owner
+        }
+        preview {
+            initWith release
+            applicationIdSuffix '.preview'
+            versionNameSuffix '-preview'
+            signingConfig signingConfigs.debug
+        }
+    }
+    compileOptions { sourceCompatibility JavaVersion.VERSION_17; targetCompatibility JavaVersion.VERSION_17 }
+    testOptions {
+        unitTests.includeAndroidResources = true
+        unitTests.all {
+            maxHeapSize = '2g'
+            def cache = layout.buildDirectory.dir('test-cache').get().asFile
+            systemProperty 'user.home', cache.absolutePath
+            doFirst { cache.mkdirs() }
+            systemProperty 'robolectric.dependency.repo.url', 'https://repo.maven.apache.org/maven2'
+            if (System.getenv('TVOS_RENDER_DIR')) systemProperty 'tvos.renders', System.getenv('TVOS_RENDER_DIR')
+        }
+    }
+}
+dependencies {
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.robolectric:robolectric:4.16.1'
+}

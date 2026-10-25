@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name" translatable="false">tvOS</string>
+    <style name="TvTheme" parent="android:style/Theme.Material.NoActionBar.Fullscreen">
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:colorAccent">#A2DAE6</item>
+        <item name="android:windowBackground">#0C1525</item>
+        <item name="android:windowActionModeOverlay">true</item>
+    </style>
+    <style name="GlassWindow" parent="android:style/Theme.Material.NoActionBar.Fullscreen">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:fontFamily">sans-serif</item>
+    </style>
+    <item name="page_title" type="id"/><item name="page_rows" type="id"/>
+    <item name="home_controls" type="id"/><item name="home_apps" type="id"/>
+</resources>

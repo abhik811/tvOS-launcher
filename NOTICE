@@ -1,0 +1,21 @@
+tvOS launcher
+Copyright (c) 2026 tvOS contributors
+
+Application source, geometric app/category symbols and procedural backgrounds
+were authored for this implementation. Application code uses the Android
+framework; there are no third-party runtime libraries or embedded font files.
+
+Build tooling:
+- Gradle wrapper 8.9.0, obtained from the official gradle/gradle v8.9.0 tag.
+  https://github.com/gradle/gradle/tree/v8.9.0
+  Wrapper scripts retain their notices; see gradle/LICENSE-APACHE-2.0.txt.
+- Android Gradle Plugin 8.5.2 is a build-time dependency.
+
+Test tooling (not in the APK):
+- JUnit 4.13.2, Eclipse Public License 1.0.
+- Robolectric 4.16.1, MIT, and its transitive test dependencies.
+
+Installed third-party apps supply their own runtime labels/icons/banners.
+Those assets are not distributed in this repository. App/platform names
+remain the property of their respective owners. This project is not an
+Apple or Google product.
